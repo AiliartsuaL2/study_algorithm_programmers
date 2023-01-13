@@ -7,19 +7,18 @@ class Solution {
         this.numbers = numbers;
         this.target = target;
         dfs(0,0);
-
         return answer;
     }
-    void dfs(int index, int sum){
-        // 1. 탈출조건
-        if(index == numbers.length){
+    public void dfs(int idx, int sum){
+        if(idx == numbers.length){
             if(sum == target){
                 answer++;
-            }
-            return;
+            } return;
         }
-        // 2. 수행동작
-        dfs(index+1,sum+numbers[index]); // 현재값 더한것 call
-        dfs(index+1,sum-numbers[index]); // 현재값 뺀것 call
-        }
+        int total1 = sum + numbers[idx];
+        int total2 = sum - numbers[idx];
+        
+        dfs(idx+1,total1);
+        dfs(idx+1,total2);    
     }
+}
