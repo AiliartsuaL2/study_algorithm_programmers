@@ -11,7 +11,6 @@ public class Solution {
             list.add(i);
             f *= i;
         }
-
         k--; 
         int idx = 0;
         while(idx < n) {
