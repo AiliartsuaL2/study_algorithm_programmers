@@ -8,7 +8,7 @@ import java.util.LinkedList;
         // 두 전력망은 각각 cnt개, n-cnt개의 송전탑이 있음
         // Math.abs(n-2*cnt) : 두 전력망이 갖고있는 송전탑의 개수의 차이
         // 최솟값을 answer에 갱신
-    // 선을 다시 복구시킴
+    // 선을 다시 복구시킴.
 class Solution {
     static int[][] arr;
     public int solution(int n, int[][] wires) {
