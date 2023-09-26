@@ -1,22 +1,18 @@
-import java.util.*;
+import java.lang.StringBuilder;
 class Solution {
     public int[] solution(long n) {
-        int[] answer = {};
-        int k = 0;
-        long num = n;
-
-        while(n>0){
-            k++;
-            n = n/10;
+        String nStr = String.valueOf(n);
+        StringBuilder sb = new StringBuilder(nStr);
+        
+        sb.reverse();
+        
+        String[] nArr = sb.toString().split("");
+        int[] answer = new int[nArr.length];
+        for(int i=0; i<nArr.length; i++){
+            // System.out.println(nArr[i]);
+            answer[i] = Integer.parseInt(nArr[i]);
         }
-
-        answer = new int[k];
-
-        for(int i=0; i<k; i++){
-            answer[i] = (int)(num%10);
-            num = num/10;
-        }
-
+        
         return answer;
     }
 }
