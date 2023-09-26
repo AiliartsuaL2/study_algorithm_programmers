@@ -1,25 +1,24 @@
 class Solution {
     public String solution(String s, int n) {
-        String answer = "";
-            
+        StringBuilder sb = new StringBuilder();
+        
         for(int i=0; i<s.length(); i++){
-         int tmp = (int) s.charAt(i) + n;
-        if((int) s.charAt(i) == 32){
-            answer += " ";
-            continue;
-        }
-        if((int)s.charAt(i) < 91){ 
-            if(tmp > 90){
-                tmp = tmp-26;
-                } 
+            char sc = s.charAt(i);
+            
+            if(sc == ' '){
+                sb.append(" ");
+                continue;                
             }
-        else{
-            if(tmp > 122){
-                tmp = tmp-26;
-                }
+            char transedSc = (char) (sc + n);
+            
+            // 46이 z 인경우, 20으로 돌려야하니까, (z-a)만큼 빼줌
+            if(sc <= 'z' && transedSc > 'z'){
+                transedSc -= ('z'-'a'+1);
+            }else if(sc <= 'Z' && transedSc > 'Z'){
+                transedSc -= ('Z'-'A'+1);
             }
-         answer+=String.valueOf((char) tmp);
+            sb.append(transedSc);
         }
-        return answer;
+        return sb.toString();
     }
 }
