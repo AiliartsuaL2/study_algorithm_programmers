@@ -1,25 +1,27 @@
 class Solution {
     public String solution(String new_id) {
-        String answer = "";
+        // 1단계
         new_id = new_id.toLowerCase();
-        new_id = new_id.replaceAll("[^a-z0-9-_.]","");
-        new_id = new_id.replaceAll("[.]{2,}",".");
-        new_id = new_id.replaceAll("^[.]|[.]$", "");
-        if(new_id.length() == 0){
-             new_id += "a";
-         }
-         if(new_id.length() >= 16){
-             new_id = new_id.substring(0,15);
-         }
-         else{
-             new_id = new_id;
-         }
-         new_id = new_id.replaceAll("[.]$", "");
-         while(new_id.length() < 3){
-            if(new_id.length()<=2){
-                new_id+=String.valueOf(new_id.charAt(new_id.length()-1));
-            }
-         } 
+        // 2단계
+        new_id = new_id.replaceAll("[^a-z0-9\\-_.]","");
+        // 3단계
+        new_id = new_id.replaceAll("\\.+",".");
+        // 4단계
+        new_id = new_id.replaceAll("^\\.+|\\.+$","");
+        // 5단계
+        if("".equals(new_id))
+            new_id = "a";
+        // 6단계
+        if(new_id.length() >= 16){
+            new_id = new_id.substring(0,15);
+            // 마침표가 1개 이상으로 끝나는 경우 제거
+            new_id = new_id.replaceAll("\\.+$","");
+        
+        }
+        // 7단계
+        while(new_id.length() < 3){
+            new_id += new_id.charAt(new_id.length()-1);
+        }
         return new_id;
     }
 }
