@@ -1,0 +1,33 @@
+import java.util.List;
+import java.util.ArrayList;
+
+class Solution {
+    public int[][] solution(int n) {
+        // n개의 기둥을 1번부터 3번까지 이동
+        return recursion(n, 1, 3).toArray(new int[0][]);
+    }
+    
+    private List<int[]> recursion(int n, int from, int to) {
+        // 종료조건 
+        // 1일때는 from에서 to로 이동
+        if(n == 1) {
+            return List.of(new int[] {from, to});
+        }
+        
+        // 비어있는 기둥 , 1번 2번 3번의 합에서 이동한 기둥을 빼주면 된다.
+        int empty = 6 - from - to;
+        
+        // 점화식 
+        //  1. n-1개의 원판을 from이나 to가 아닌 빈 기둥으로 옮긴다.
+        //  2. 하나의 원판을 from기둥에서 to기둥으로 옮긴다.
+        //  3. n-1개의 원판을 빈 기둥에서 to 기둥으로 옮긴다.
+        // pseudo code
+        // (n, from, to) = 1번 (n-1, from, empty) + 2번 (1, from, to) + 3번(n-1, empty, to)
+        List<int[]> result = new ArrayList<>();
+        result.addAll(recursion(n-1, from, empty));
+        result.addAll(recursion(1, from, to));
+        result.addAll(recursion(n-1, empty, to));
+        
+        return result;
+    }
+}
