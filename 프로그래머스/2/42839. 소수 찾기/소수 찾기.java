@@ -3,14 +3,15 @@ import java.util.stream.Collectors;
 
 class Solution {
     public int solution(String numbers) {
+        Set<Integer> primes = new HashSet<>();
         List<Integer> numberList = Arrays.asList(numbers.split("")).stream()
             .map(n -> Integer.parseInt(n))
             .collect(Collectors.toList());
-        return recursion(0, numberList).size();
+        recursion(0, numberList, primes);
+        return primes.size();
     }
     
-    private Set<Integer> recursion(int now, List<Integer> numbers) {
-        Set<Integer> primes = new HashSet<>();
+    private void recursion(int now, List<Integer> numbers, Set<Integer> primes) {
         // 소수면 현재 값 추가
         if(isPrime(now)) {
             primes.add(now);
@@ -24,10 +25,8 @@ class Solution {
             List<Integer> nextNumbers = new ArrayList<>(numbers);
             nextNumbers.remove(i);
             // 리턴된 값들을 결과 집합에 추가
-            primes.addAll(recursion(next, nextNumbers));
+            recursion(next, nextNumbers, primes);
         }
-        
-        return primes;
     }
     
     private boolean isPrime(int number) {
