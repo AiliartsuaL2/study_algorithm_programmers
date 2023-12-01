@@ -1,6 +1,5 @@
 import java.util.Collections;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 class Solution {
     int[] array;
@@ -9,20 +8,18 @@ class Solution {
         this.array = array;
         int index = 0;
         for(int[] command : commands) {
-            int i = command[0];
-            int j = command[1];
-            int k = command[2];
-            answer[index++] = getNumber(i, j, k);
+            // 배열은 0번부터 시작
+            int from = command[0] - 1;
+            int to = command[1];
+            // 배열은 0번부터 시작 
+            int k = command[2] - 1;
+            answer[index++] = getNumber(from, to, k);
         }
         return answer;
     }
-    private int getNumber(int i, int j, int k) {
-        List<Integer> numbers = new ArrayList<>();
-        for(int a = i-1; a < j; a++) {
-            numbers.add(array[a]);
-        }
-        Collections.sort(numbers);
-        
-        return numbers.get(k-1);
+    private int getNumber(int from, int to, int k) {
+        int[] numbers = Arrays.copyOfRange(array, from, to);
+        Arrays.sort(numbers);
+        return numbers[k];
     }    
 }
